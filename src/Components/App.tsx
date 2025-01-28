@@ -9,9 +9,9 @@ import Login from "./Login";
 import Search from "./Search";
 import Favorites from "./Favorites";
 import PrivateRoute from "./PrivateRoute";
-
 function App() {
-  const [user, setUser] = useState(null);
+
+  const [user, setUser] = useState('ryan');
   return (
     <Router>
       <Routes>
@@ -28,7 +28,7 @@ function App() {
           path="/favorites"
           element={
             <PrivateRoute user={user}>
-              <Favorites user={user} />
+              <Favorites user={user} favorites={undefined} />
             </PrivateRoute>
           }
         />
