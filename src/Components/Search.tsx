@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-
-const API_KEY = 'YOUR_GIPHY_API_KEY';
+const API_KEY = import.meta.env.VITE_GIPHY_API_KEY;
 
 function Search({ user }) {
   const [query, setQuery] = useState('');
