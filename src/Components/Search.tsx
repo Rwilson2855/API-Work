@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+
 const API_KEY = import.meta.env.VITE_GIPHY_API_KEY;
 
-function Search({ user }) {
+function Search({ user,  setFavorites }) {
   const [query, setQuery] = useState('');
   const [gifs, setGifs] = useState([]);
-  const [favorites, setFavorites] = useState([]);
 
   const searchGifs = async () => {
     const response = await fetch(`https://api.giphy.com/v1/gifs/search?api_key=${API_KEY}&q=${query}&limit=10`);
@@ -13,7 +14,7 @@ function Search({ user }) {
   };
 
   const addToFavorites = (gif) => {
-    setFavorites([...favorites, gif]);
+    setFavorites(prevFavorites => [...prevFavorites, gif]);
   };
 
   return (
@@ -25,7 +26,7 @@ function Search({ user }) {
         onChange={(e) => setQuery(e.target.value)}
         placeholder="Search GIFs"
       />
-      <button onClick={searchGifs}>Search</button>
+      <button onClick={searchGifs}>Search for Gifs!</button>
       <div>
         {gifs.map((gif) => (
           <div key={gif.id}>
@@ -34,6 +35,7 @@ function Search({ user }) {
           </div>
         ))}
       </div>
+      <Link to="/favorites">Go to Favorites</Link>
     </div>
   );
 }
